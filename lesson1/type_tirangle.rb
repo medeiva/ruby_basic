@@ -21,3 +21,4 @@ if !is_equilateral
 elsif 
   puts "треугольник равнобедренный и равносторонний"
 end
+
