@@ -15,7 +15,7 @@ if !is_equilateral
 	elsif b > c && b > a
 		is_rectangular = (b**2 == a**2 + c**2)
 	else 
-	 	is_rectangular = (c**2 == a**2 + b**2)
+		is_rectangular = (c**2 == a**2 + b**2)
 	end
 	puts "треугольник - #{is_rectangular ? 'прямоугольный' : is_isosceles ? 'равнобедренный' : 'никакой'}"
 elsif 
