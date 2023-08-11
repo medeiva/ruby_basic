@@ -28,11 +28,11 @@ class Train
   end
 
   def next_station
-    @route.list_station[index_station+1]
+    @route.list_station[index_station + 1]
   end
 
   def prev_station
-    @route.list_station[index_station-1]
+    @route.list_station[index_station - 1]
   end
 
   def go_to_next_station
