@@ -50,8 +50,5 @@ class Train
     @current_station = new_station
     @current_station.take_train(self)
   end
-
-  def index_station
-    @route.stations.index(self.station)
-  end
+  
 end
