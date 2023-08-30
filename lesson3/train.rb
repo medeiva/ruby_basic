@@ -28,27 +28,38 @@ class Train
     @current_station.take_train(self)
   end
 
+  def current_station
+    @route.stations[current_station_index]
+  end
+
   def next_station
     @route.stations[current_station_index + 1]
   end
 
-  def prev_station
+  def previous_station
     @route.stations[current_station_index - 1]
   end
 
   def go_to_next_station
-    move_to_station(next_station, current_station_index + 1) if current_station != @route.stations.last
+    if next_station
+      move_to_station(next_station) 
+      @current_station_index += 1
+    end
   end
 
-  def go_to_prev_station
-    move_to_station(prev_station, current_station_index - 1) if current_station != @route.stations.first
+  def go_to_previous_station
+    if previous_station
+      move_to_station(previous_station) 
+      @current_station_index -= 1
+    end
   end
 
-  def move_to_station(new_station, index)
-    @current_station_index = index
-    @current_station.send_train(self)
-    @current_station = new_station
-    @current_station.take_train(self)
+  private
+
+  def move_to_station(new_station)
+    current_station.send_train(self)
+    current_station = new_station
+    current_station.take_train(self)
   end
   
 end
