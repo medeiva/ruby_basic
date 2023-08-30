@@ -1,20 +1,20 @@
 class Train
   attr_accessor :speed
-  attr_reader :count_carriage, :type, :current_station_index, :current_station, :route
+  attr_reader :count_carriage, :type, :current_station_index, :current_station, :route, :carriages, :number
 
-  def initialize(number, type, count_carriage)
+  def initialize(number)
     @number = number
-    @type = type
     @count_carriage = count_carriage
     @speed = 0
+    @carriages = []
   end
 
   def stop
     @speed = 0
   end
 
-  def add_carriadge
-    @count_carriage += 1 if @speed == 0
+  def add_carriadge(carriage)
+    @carriages.push(carriage)
   end
 
   def remove_carriadge
@@ -52,6 +52,10 @@ class Train
       move_to_station(previous_station) 
       @current_station_index -= 1
     end
+  end
+
+  def delete_carriadge
+    carriages.pop() if carriages.size
   end
 
   private
