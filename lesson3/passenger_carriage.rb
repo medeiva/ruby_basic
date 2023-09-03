@@ -1,8 +1,8 @@
 class PassengerCarriage < Carriage
 
-  def type
-    :passenger 
+  def initialize(type)
+    super(:passenger)
   end
-  
+
 end
 

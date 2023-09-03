@@ -1,7 +1,7 @@
 class CagroTrain < Train
   
-  def type
-    :cargo 
+  def initialize(number)
+    super(number, :cargo)
   end
   
 end

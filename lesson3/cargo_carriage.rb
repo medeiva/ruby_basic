@@ -1,7 +1,7 @@
 class CagroCarriage < Carriage
-
-  def type
-    :cargo
-  end
   
+  def initialize(type)
+    super(:cargo)
+  end
+
 end
