@@ -6,6 +6,9 @@ require_relative 'passenger_train'
 require_relative 'cargo_train'
 require_relative 'cargo_carriage'
 require_relative 'passenger_carriage'
+require_relative 'work_with_train'
+require_relative 'work_with_route'
+require_relative 'work_with_station'
 require_relative 'rail_road'
 
 puts "Привет, это программа - абстракция железной дороги"

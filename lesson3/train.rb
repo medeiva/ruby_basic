@@ -14,7 +14,7 @@ class Train
   end
 
   def add_carriadge(carriage)
-    @carriages.push(carriage)
+    carriages.push(carriage)
   end
 
   def remove_carriadge
@@ -25,19 +25,19 @@ class Train
     @route = route
     @current_station_index = 0
     @current_station = @route.stations.first
-    @current_station.take_train(self)
+    current_station.take_train(self)
   end
 
   def current_station
-    @route.stations[current_station_index]
+    route.stations[current_station_index]
   end
 
   def next_station
-    @route.stations[current_station_index + 1]
+    route.stations[current_station_index + 1]
   end
 
   def previous_station
-    @route.stations[current_station_index - 1]
+    route.stations[current_station_index - 1]
   end
 
   def go_to_next_station
