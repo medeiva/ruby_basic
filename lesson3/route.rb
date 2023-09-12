@@ -1,8 +1,11 @@
+require_relative 'instance_counter_module'
+
 class Route
   attr_accessor :stations
 
   def initialize(start_station, end_station)
     @stations = [start_station, end_station]
+    register_instance
   end
   
   def add_station(station)

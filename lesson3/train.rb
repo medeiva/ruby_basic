@@ -1,12 +1,18 @@
+require_relative 'instance_counter_module'
+
 class Train
+  include CompanyName
+  include InstanceCounter
   attr_accessor :speed
   attr_reader :count_carriage, :type, :current_station_index, :current_station, :route, :carriages, :number
-
+  @@instances = 0
+  
   def initialize(number, type)
     @number = number
     @count_carriage = count_carriage
     @speed = 0
     @carriages = []
+    register_instance
   end
 
   def stop
@@ -66,4 +72,8 @@ class Train
     current_station.take_train(self)
   end
   
+  def self.find(number) 
+    allTrain = ObjectSpace.each_object(self).to_a
+    allTrain.find { |train| train.number == number }  
+  end
 end

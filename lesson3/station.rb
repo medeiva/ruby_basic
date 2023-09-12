@@ -1,9 +1,15 @@
+require_relative 'instance_counter_module'
+
 class Station
   attr_reader :trains, :name
 
+  @@instances = 0
+
   def initialize(name)
+    @@instances += 1
     @name = name
     @trains = []
+    register_instance
   end
 
   def take_train(train)
@@ -16,5 +22,13 @@ class Station
 
   def trains_by_type(type)
     trains.select { |train| train.type == type }
+  end
+
+  def self.instances
+    @@instances
+  end
+
+  def self.all
+    ObjectSpace.each_object(self).to_a
   end
 end
