@@ -12,6 +12,7 @@ module InstanceCounter
 
   module InstanceMethods  
   
+    protected
 
     def register_instance
       @@instances += 1
