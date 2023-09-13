@@ -3,8 +3,6 @@ require_relative 'instance_counter_module'
 class Station
   attr_reader :trains, :name
 
-  @@instances = 0
-
   def initialize(name)
     @@instances += 1
     @name = name
