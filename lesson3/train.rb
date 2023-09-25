@@ -6,11 +6,15 @@ class Train
   attr_accessor :speed
   attr_reader :count_carriage, :type, :current_station_index, :current_station, :route, :carriages, :number
   
+  NUMBER_FORMAT = /^([a-я]{3}|\d{3})[-]?([a-я]{2}|\d{2})$/i
+
   def initialize(number, type)
     @number = number
     @count_carriage = count_carriage
     @speed = 0
     @carriages = []
+    @type = type
+    validate!
     register_instance
   end
 
@@ -63,6 +67,23 @@ class Train
     carriages.pop() if carriages.size
   end
 
+  def valid?
+    validate!
+  rescue
+    false
+  end
+
+  protected
+
+  def validate!
+    errors = []
+    errors << "Номер поезда не может быть пустым" if number.nil?
+    errors << "Неверный формат номера" if number !~ NUMBER_FORMAT
+    errors << "Не верный тип создаваемого поезда" unless type == :cargo || type == :passenger
+    errors << "Тип поезда не может быть пустым" if type.nil?
+    raise errors.join(". ") unless errors.empty?
+  end
+
   private
 
   def move_to_station(new_station)
@@ -75,4 +96,5 @@ class Train
     allTrain = ObjectSpace.each_object(self).to_a
     allTrain.find { |train| train.number == number }  
   end
+
 end

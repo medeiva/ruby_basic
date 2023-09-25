@@ -39,17 +39,20 @@ class WorkWithTrain
   end
 
   def create_train(trains)
-    puts "Введите 1, если поезд грузовой \n Введите 2, если поезд пассажирский"
-    type = gets.to_i
-    puts "Введите номер поезда"
-    number = gets.chomp.to_s
-    train = if type == 1
-              CagroTrain.new(number)
-            elsif type == 2
-              PassengerTrain.new(number)
-            end
-    puts "Поезд #{number} создан"
-    trains.push(train)
+      puts "Введите 1, если поезд грузовой \n Введите 2, если поезд пассажирский"
+      type = gets.to_i
+      puts "Введите номер поезда"
+      number = gets.chomp.to_s
+      train = if type == 1
+                CagroTrain.new(number)
+              elsif type == 2
+                PassengerTrain.new(number)
+              end
+      trains.push(train)
+      puts "Поезд #{number} создан"
+      rescue StandardError => e
+        puts "Ошибка создания поезда: #{e.message}"
+        retry
   end
 
   private 

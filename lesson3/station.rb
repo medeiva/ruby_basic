@@ -1,13 +1,12 @@
-require_relative 'instance_counter_module'
-
 class Station
   attr_reader :trains, :name
+  @@instances = 0
 
   def initialize(name)
     @@instances += 1
     @name = name
     @trains = []
-    register_instance
+    validate!
   end
 
   def take_train(train)
@@ -28,5 +27,17 @@ class Station
 
   def self.all
     ObjectSpace.each_object(self).to_a
+  end
+
+  def valid?
+    validate!
+  rescue
+    false
+  end
+
+  protected
+
+  def validate!
+    raise "name can't be nill" if name.nil?
   end
 end
