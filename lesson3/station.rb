@@ -35,6 +35,10 @@ class Station
     false
   end
 
+  def each_train(&block)
+    trains.each(&block)
+  end
+
   protected
 
   def validate!

@@ -64,7 +64,7 @@ class Train
   end
 
   def delete_carriadge
-    carriages.pop() if carriages.size
+    carriages.pop() if carriages.siz
   end
 
   def valid?
@@ -73,6 +73,10 @@ class Train
     false
   end
 
+  def each_carriage(&block)
+    carriages.each_with_index(&block)
+  end
+  
   protected
 
   def validate!

@@ -118,6 +118,8 @@ class RailRoad
           'хотите переместить поезд на следующую станцию',
           'хотите переместить поезд на предыдущую станцию',
           'если хотите назначить поезду маршрут',
+          'если хотите посмотерть список вагонов',
+          'занять место в вагоне',
         ])
         choise = gets.to_i
         case choise
@@ -134,6 +136,10 @@ class RailRoad
             @workWithRoute.display_routes(@routes)
             @workWithTrain.set_route(@routes, @rain)
           end
+        when 6
+          @workWithTrain.show_carrige(train)
+        when 7
+          @workWithTrain.take_place(train)
         when 0
           break
         else

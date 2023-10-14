@@ -12,7 +12,9 @@ class WorkWithTrain
   end
 
   def add_carriadge(train)
-    carriage = create_carrige(train)
+    puts "Введите вместимость вагона"
+    size = gets.to_i
+    carriage = create_carrige(train, size)
     train.add_carriadge(carriage)
   end
 
@@ -55,13 +57,32 @@ class WorkWithTrain
         retry
   end
 
+  def show_carrige(train)
+    train.each_carriage do |carriage, index| 
+        puts "Номер вагона - #{index}, тип вагона - #{carriage.type}, кол-во  #{carriage.type == :passenger ? " занятых мест" : "занятого обьема"} - #{carriage.occupied_size}, кол-во  #{carriage.type == :passenger ? " свободных мест" : "свободного обьема"} - #{carriage.size - carriage.occupied_size}"
+    end
+  end
+
+  def take_place(train)
+    show_carrige(train)
+    puts "Введите номер вагона, c которым хотите совершить операцию"
+    carriage = train.carriages[gets.to_i - 1]
+    puts "Введите кол-во занимаего места"
+    size = gets.to_i 
+     if carriage.occupied_size - carriage.size > 0
+      carriage.occupied_size += size
+     else 
+      puts "Невозможно занять столько места. Свободных мест #{carriage.occupied_size - carriage.size}"
+     end
+  end
+
   private 
 
-  def create_carrige(train)
+  def create_carrige(train, size)
     if train.type == :passenger
-        PassengerCarriage.new()
+        PassengerCarriage.new(size)
     elsif train.type == :cargo
-        CagroCarriage.new()
+        CagroCarriage.new(size)
     end
   end
 end

@@ -1,9 +1,10 @@
 class Carriage
   include CompanyName
-  attr_reader :type
-
-  def initialize(type)
-    @type = type
+  attr_reader :type, :size, :occupied_size
+  
+  def initialize(size)
+    @size = size
+    @occupied_size = 0
     validate!
   end
   

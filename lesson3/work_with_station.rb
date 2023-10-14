@@ -17,13 +17,10 @@ class WorkWithStation
     station = stations[gets.to_i]
 
     if station
-      station.trains.each do |train|
+      station.each_train do |train|
         puts "Номер: #{train.number}"
         puts "Тип поезда - #{train.type}"
         puts "Кол-во вагонов - #{train.carriages.size}"
-        train.each_index do |carriage, index|
-          puts "#{index} - тип вагона #{carriage.type}"
-        end
       end
     else
       puts "Вы ввели неправильное номер станции"
