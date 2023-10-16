@@ -139,7 +139,7 @@ class RailRoad
         when 6
           @workWithTrain.show_carrige(train)
         when 7
-          @workWithTrain.take_place(train)
+          @workWithTrain.take_capacity(train)
         when 0
           break
         else

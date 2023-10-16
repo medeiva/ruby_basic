@@ -1,9 +1,12 @@
 class PassengerCarriage < Carriage
 
-  def initialize(size)
+  def initialize(capacity)
     @type = :passenger
-    super(size)
+    super(capacity)
   end
 
+  def take_capacity
+    @occupied_capacity += 1
+  end
 end
 

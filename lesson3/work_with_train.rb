@@ -59,21 +59,25 @@ class WorkWithTrain
 
   def show_carrige(train)
     train.each_carriage do |carriage, index| 
-        puts "Номер вагона - #{index}, тип вагона - #{carriage.type}, кол-во  #{carriage.type == :passenger ? " занятых мест" : "занятого обьема"} - #{carriage.occupied_size}, кол-во  #{carriage.type == :passenger ? " свободных мест" : "свободного обьема"} - #{carriage.size - carriage.occupied_size}"
+        puts "Номер вагона - #{index}, тип вагона - #{carriage.type}, вместимость - #{carriage.capacity}, кол-во #{carriage.type == :passenger ? " занятых мест" : "занятого обьема"} - #{carriage.occupied_capacity}, кол-во #{carriage.type == :passenger ? "свободных мест" : "свободного обьема"} - #{carriage.free_capacity}"
     end
   end
 
-  def take_place(train)
+  def take_capacity(train)
     show_carrige(train)
     puts "Введите номер вагона, c которым хотите совершить операцию"
     carriage = train.carriages[gets.to_i - 1]
-    puts "Введите кол-во занимаего места"
-    size = gets.to_i 
-     if carriage.occupied_size - carriage.size > 0
-      carriage.occupied_size += size
-     else 
-      puts "Невозможно занять столько места. Свободных мест #{carriage.occupied_size - carriage.size}"
-     end
+    if carriage.type == :cargo 
+      puts "Введите кол-во занимаего места"
+      quantity = gets.to_i 
+    else 
+      quantity = 1
+    end
+    if carriage.free_capacity - quantity >= 0
+      carriage.type == :cargo  ? carriage.take_capacity(quantity) : carriage.take_capacity()
+    else 
+      puts "Невозможно занять столько места. Свободных мест #{carriage.free_capacity}"
+    end
   end
 
   private 

@@ -1,10 +1,11 @@
 class Carriage
   include CompanyName
-  attr_reader :type, :size, :occupied_size
+  attr_accessor :occupied_capacity
+  attr_reader :type, :capacity
   
-  def initialize(size)
-    @size = size
-    @occupied_size = 0
+  def initialize(capacity)
+    @capacity = capacity
+    @occupied_capacity = 0
     validate!
   end
   
@@ -12,6 +13,10 @@ class Carriage
     validate!
   rescue
     false
+  end
+
+  def free_capacity
+    capacity - occupied_capacity
   end
 
   protected
