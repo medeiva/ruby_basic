@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require_relative 'instance_counter_module'
 
 class Train
   include CompanyName
   include InstanceCounter
   attr_accessor :speed
-  attr_reader :count_carriage, :type, :current_station_index, :current_station, :route, :carriages, :number
-  
-  NUMBER_FORMAT = /^([a-я]{3}|\d{3})[-]?([a-я]{2}|\d{2})$/i
+  attr_reader :count_carriage, :type, :current_station_index, :route, :carriages, :number
+
+  NUMBER_FORMAT = /^([a-я]{3}|\d{3})-?([a-я]{2}|\d{2})$/i.freeze
 
   def initialize(number, type)
     @number = number
@@ -27,7 +29,7 @@ class Train
   end
 
   def remove_carriadge
-    @count_carriage -= 1 if @speed == 0
+    @count_carriage -= 1 if @speed.zero?
   end
 
   def assigne_route(route)
@@ -50,42 +52,47 @@ class Train
   end
 
   def go_to_next_station
-    if next_station
-      move_to_station(next_station) 
-      @current_station_index += 1
-    end
+    return unless next_station
+
+    move_to_station(next_station)
+    @current_station_index += 1
   end
 
   def go_to_previous_station
-    if previous_station
-      move_to_station(previous_station) 
-      @current_station_index -= 1
-    end
+    return unless previous_station
+
+    move_to_station(previous_station)
+    @current_station_index -= 1
   end
 
   def delete_carriadge
-    carriages.pop() if carriages.siz
+    carriages.pop if carriages.siz
   end
 
   def valid?
     validate!
-  rescue
+  rescue StandardError
     false
   end
 
   def each_carriage(&block)
     carriages.each_with_index(&block)
   end
-  
+
+  def self.find(number)
+    all_train = ObjectSpace.each_object(self).to_a
+    all_train.find { |train| train.number == number }
+  end
+
   protected
 
   def validate!
     errors = []
-    errors << "Номер поезда не может быть пустым" if number.nil?
-    errors << "Неверный формат номера" if number !~ NUMBER_FORMAT
-    errors << "Не верный тип создаваемого поезда" unless type == :cargo || type == :passenger
-    errors << "Тип поезда не может быть пустым" if type.nil?
-    raise errors.join(". ") unless errors.empty?
+    errors << 'Номер поезда не может быть пустым' if number.nil?
+    errors << 'Неверный формат номера' if number !~ NUMBER_FORMAT
+    errors << 'Не верный тип создаваемого поезда' unless type == :cargo || type == :passenger
+    errors << 'Тип поезда не может быть пустым' if type.nil?
+    raise errors.join('. ') unless errors.empty?
   end
 
   private
@@ -95,10 +102,4 @@ class Train
     current_station = new_station
     current_station.take_train(self)
   end
-  
-  def self.find(number) 
-    allTrain = ObjectSpace.each_object(self).to_a
-    allTrain.find { |train| train.number == number }  
-  end
-
 end

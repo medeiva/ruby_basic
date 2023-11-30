@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class Station
   attr_reader :trains, :name
+
   @@instances = 0
 
   def initialize(name)
@@ -31,7 +34,7 @@ class Station
 
   def valid?
     validate!
-  rescue
+  rescue StandardError
     false
   end
 

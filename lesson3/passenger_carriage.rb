@@ -1,5 +1,6 @@
-class PassengerCarriage < Carriage
+# frozen_string_literal: true
 
+class PassengerCarriage < Carriage
   def initialize(capacity)
     @type = :passenger
     super(capacity)
@@ -9,4 +10,3 @@ class PassengerCarriage < Carriage
     @occupied_capacity += 1
   end
 end
-

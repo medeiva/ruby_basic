@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'instance_counter_module'
 
 class Route
@@ -9,7 +11,7 @@ class Route
     validate!
     register_instance
   end
-  
+
   def add_station(station)
     stations.insert(-2, station)
   end
@@ -19,28 +21,27 @@ class Route
   end
 
   def show_list_stations
-    stations.each do |station|  
+    stations.each do |station|
       puts station.name
-    end 
+    end
   end
 
   def valid?
     validate!
-  rescue
+  rescue StandardError
     false
   end
 
   protected
 
   def validate!
-    raise "Start station has invalid format" if @stations.first.class != Station
-    raise "End station has invalid format" if @stations.last.class != Station
+    raise 'Start station has invalid format' if @stations.first.class != Station
+    raise 'End station has invalid format' if @stations.last.class != Station
   end
 
-  private 
+  private
 
   def delete_station?(station)
-    stations.include?(station) && stations.last != station && stations.first != station 
+    stations.include?(station) && stations.last != station && stations.first != station
   end
-
 end

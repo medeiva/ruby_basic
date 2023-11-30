@@ -1,19 +1,20 @@
-class WorkWithStation
+# frozen_string_literal: true
 
+class WorkWithStation
   def display_stations?(stations)
-    puts "Нет доступных станций. Создайте новую станцию.\n\n" unless stations.size > 0
-    stations.size > 0
+    puts "Нет доступных станций. Создайте новую станцию.\n\n" unless stations.size.positive?
+    stations.size.positive?
   end
 
-  def display_stations(stations) 
+  def display_stations(stations)
     stations.each_with_index do |station, index|
       puts "#{index}-станция #{station.name}"
     end
   end
 
-  def display_trains_on_stations(stations) 
+  def display_trains_on_stations(stations)
     display_stations(stations)
-    puts "Введите номер станции, список поездов на которой хотите посмотреть"
+    puts 'Введите номер станции, список поездов на которой хотите посмотреть'
     station = stations[gets.to_i]
 
     if station
@@ -23,15 +24,13 @@ class WorkWithStation
         puts "Кол-во вагонов - #{train.carriages.size}"
       end
     else
-      puts "Вы ввели неправильное номер станции"
+      puts 'Вы ввели неправильное номер станции'
     end
-  
   end
 
   def create_station(stations)
-    puts "Введите название станции"
+    puts 'Введите название станции'
     name = gets.chomp
     stations.push(Station.new(name))
   end
-
 end
