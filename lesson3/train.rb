@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'instance_counter_module'
+require_relative 'validation'
 
 class Train
   include CompanyName
@@ -9,6 +10,11 @@ class Train
   attr_reader :count_carriage, :type, :current_station_index, :route, :carriages, :number
 
   NUMBER_FORMAT = /^([a-я]{3}|\d{3})-?([a-я]{2}|\d{2})$/i.freeze
+
+  validate :number, :presence
+  validate :number, :format, NUMBER_FORMAT
+  validate :type, :type, Symbol
+  validate :carriages, :presence
 
   def initialize(number, type)
     @number = number
