@@ -6,6 +6,8 @@ require_relative 'validation'
 class Train
   include CompanyName
   include InstanceCounter
+  include Validation
+
   attr_accessor :speed
   attr_reader :count_carriage, :type, :current_station_index, :route, :carriages, :number
 
