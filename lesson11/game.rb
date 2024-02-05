@@ -166,6 +166,8 @@ class Game
        @winner.money += @bank
        puts "Победил #{@winner.name}"
     else 
+      @user.money += @bank/2
+      @diller.money += @bank/2
       puts "Ничья"
     end
   end
