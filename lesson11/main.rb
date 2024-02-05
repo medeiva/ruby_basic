@@ -4,4 +4,4 @@ require_relative 'card_deck'
 require_relative 'card'
 
 game = Game.new
-game.start
+game.create
