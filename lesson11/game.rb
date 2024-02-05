@@ -48,6 +48,8 @@ class Game
   def clean
     @user.cards = []
     @diller.cards = []
+    @user.points = 0
+    @diller.points = 0
     @card_deck = CardDeck.new
   end
 
